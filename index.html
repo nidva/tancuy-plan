@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Контент-план «Танцуй», 1–7 октября</title>
+<style>
+:root{
+  --paper:#FBFAFD; --panel:#FFFFFF; --ink:#2A1533; --muted:#6F6078; --line:#E4DDEA;
+  --fuchsia:#D4157E; --teal:#00857F; --sun:#F2B400; --plum:#5B2A86;
+  --seg-off:#E9E3EE; --tag-ink:#FFFFFF; --sun-ink:#2A1533;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#1A0F21; --panel:#251730; --ink:#F4EEF7; --muted:#B3A4BD; --line:#3B2A47;
+    --fuchsia:#FF5FB2; --teal:#3FD1C8; --sun:#FFCF4A; --plum:#B68AE6;
+    --seg-off:#3B2A47; --tag-ink:#1A0F21; --sun-ink:#1A0F21;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1A0F21; --panel:#251730; --ink:#F4EEF7; --muted:#B3A4BD; --line:#3B2A47;
+  --fuchsia:#FF5FB2; --teal:#3FD1C8; --sun:#FFCF4A; --plum:#B68AE6;
+  --seg-off:#3B2A47; --tag-ink:#1A0F21; --sun-ink:#1A0F21;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1rem;line-height:1.5}
+.wrap{max-width:60rem;margin:0 auto;padding:2rem 1.25rem 4rem}
+h1{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;
+  font-size:clamp(1.7rem,5.2vw,3.1rem);line-height:1.08;margin:0 0 .75rem;letter-spacing:-.01em}
+.lead{color:var(--muted);max-width:42rem;margin:0 0 1.75rem}
+
+/* прогресс-гетра */
+.progress{margin:0 0 1.5rem}
+.progress-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.5rem}
+.progress-top strong{font-weight:700;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:500;font-size:1.05rem}
+.progress-top span{color:var(--muted);font-size:.9rem}
+.gaiter{display:flex;gap:3px;height:2rem;border-radius:.4rem 1rem 1rem .4rem;overflow:hidden}
+.gaiter i{flex:1;background:var(--seg-off);transition:background .25s}
+.gaiter i.on:nth-child(3n+1){background:var(--fuchsia)}
+.gaiter i.on:nth-child(3n+2){background:var(--sun)}
+.gaiter i.on:nth-child(3n){background:var(--teal)}
+
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 .75rem}
+.filters button{font:inherit;font-weight:500;color:var(--ink);background:transparent;
+  border:1.5px solid var(--line);border-radius:2rem;padding:.4rem .95rem;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.note{color:var(--muted);font-size:.875rem;margin:0 0 2rem;min-height:1.3em}
+
+.day{display:grid;grid-template-columns:11rem 1fr;gap:1.5rem;padding:1.75rem 0;border-top:2px solid var(--ink)}
+.day-head{position:relative}
+.day-date{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;font-size:2.4rem;line-height:1}
+.day-dow{font-weight:600;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:500;font-size:.95rem;margin-top:.3rem}
+.day-aud{margin-top:.9rem;font-weight:600}
+.day-el{color:var(--muted);font-size:.95rem}
+.day-count{margin-top:.7rem;font-size:.875rem;color:var(--muted)}
+
+.item{display:grid;grid-template-columns:2.25rem 1fr;align-items:start;
+  background:var(--panel);border:1px solid var(--line);border-radius:.75rem;margin-bottom:.6rem}
+.item.done{opacity:.62}
+.item.done .title{text-decoration:line-through}
+.check{display:flex;justify-content:center;padding:.95rem 0 0 .6rem;cursor:pointer}
+.check input{width:1.25rem;height:1.25rem;accent-color:var(--fuchsia);cursor:pointer;margin:0}
+details{min-width:0}
+summary{list-style:none;cursor:pointer;padding:.8rem 1rem .8rem .6rem;display:flex;flex-wrap:wrap;
+  align-items:center;gap:.4rem .6rem;border-radius:.75rem}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible,.filters button:focus-visible,.check input:focus-visible,.copy:focus-visible{
+  outline:3px solid var(--teal);outline-offset:2px}
+.time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem;min-width:2.9rem}
+.tag{font-size:.78rem;font-weight:600;padding:.12rem .55rem;border-radius:.35rem;color:var(--tag-ink)}
+.tag.story{background:var(--teal)} .tag.post{background:var(--plum)} .tag.reel{background:var(--fuchsia)}
+.tag.n90{background:var(--sun);color:var(--sun-ink)}
+.title{font-weight:600;flex:1 1 14rem}
+.body{padding:0 1rem 1rem .6rem;max-width:40rem}
+.body dl{margin:0}
+.body dt{font-size:.85rem;color:var(--muted);margin-top:.7rem}
+.body dd{margin:.1rem 0 0}
+.body ol{margin:.2rem 0 0;padding-left:0;list-style:none}
+.body li{margin-bottom:.3rem}
+.text{white-space:pre-wrap;background:var(--paper);border:1px dashed var(--line);border-radius:.5rem;padding:.75rem .9rem}
+.copy{font:inherit;font-size:.875rem;font-weight:500;margin-top:.6rem;color:var(--ink);background:transparent;
+  border:1.5px solid var(--ink);border-radius:2rem;padding:.3rem .85rem;cursor:pointer}
+.hidden{display:none!important}
+footer{border-top:2px solid var(--ink);padding-top:1.25rem;color:var(--muted);font-size:.9rem}
+footer p{margin:0 0 .5rem;max-width:44rem}
+@media (max-width:40rem){
+  .day{grid-template-columns:1fr;gap:1rem}
+  .day-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .7rem}
+  .day-date{font-size:1.8rem}
+  .day-aud,.day-count,.day-dow{font-weight:600;margin-top:0}
+  .day-el{flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){.gaiter i{transition:none}}
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="План Танцуй">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Собираем образ с нуля</h1>
+    <p class="lead">Контент-план магазина «Танцуй» на 1–7 октября 2026. Каждый день — один элемент образа и одна аудитория. Отмечайте галочкой то, что уже вышло.</p>
+  </header>
+
+  <section class="progress" aria-label="Прогресс недели">
+    <div class="progress-top"><strong id="pcount">Готово 0 из 25</strong><span>21 сторис, 2 поста, 2 рилса</span></div>
+    <div class="gaiter" id="gaiter" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0"></div>
+  </section>
+
+  <div class="filters" id="filters" role="group" aria-label="Показать">
+    <button type="button" data-f="all" aria-pressed="true">Всё</button>
+    <button type="button" data-f="story" aria-pressed="false">Сторис</button>
+    <button type="button" data-f="post" aria-pressed="false">Посты</button>
+    <button type="button" data-f="reel" aria-pressed="false">Рилсы</button>
+    <button type="button" data-f="todo" aria-pressed="false">Не сделано</button>
+  </div>
+  <p class="note" id="note" role="status"></p>
+
+  <main id="days"></main>
+
+  <footer>
+    <p><b>Где публиковать.</b> Сторис — Instagram и VK. В Telegram и MAX дублируйте дневную товарную сторис коротким постом в канал. Рилсы — Instagram Reels и VK Клипы, в Telegram и MAX — как видео. Посты — на все четыре площадки.</p>
+    <p><b>Что проверить перед публикацией.</b> Из ассортимента подтверждены только яркие гетры и лосины. Обувь, купальники, инвентарь и условия заказа на коллектив записаны как предположение — замените на то, что реально есть в магазине.</p>
+  </footer>
+</div>
+
+<script>
+const FORMAT = {story:"Сторис", post:"Пост", reel:"Рилс"};
+const DAYS = [
+ {date:"01.10", dow:"Четверг", aud:"Взрослые танцоры", el:"Низ: лосины и гетры", items:[
+  {id:"d1s1", f:"story", t:"09:00", title:"Старт сюжета: с чего начинается образ",
+   shoot:"Стойка с лосинами, рука перебирает вешалки. 5–7 секунд.",
+   text:"Всю неделю собираем образ с нуля: от низа до аксессуаров. С чего начинаете вы?",
+   sticker:"Опрос: «Лосины» / «Шорты»."},
+  {id:"d1s2", f:"story", t:"13:00", title:"Товар дня: лосины",
+   shoot:"Три модели крупным планом: ткань, пояс, посадка на фигуре.",
+   text:"Низ, в котором удобно и в шпагат, и в прыжок.",
+   cta:"«Напишите слово “лосины” — пришлём размеры и цены»."},
+  {id:"d1s3", f:"story", n90:true, t:"18:00", title:"Дискотека 90-х: образ за 5 минут",
+   shoot:"Сотрудник или манекен в ярких лосинах и гетрах, энергичная музыка в духе 90-х, неоновый текст.",
+   text:"Завтра дискотека 90-х? Яркие лосины + гетры — и образ готов.",
+   cta:"«Забрать можно сегодня и завтра. Напишите нам — отложим ваш размер».",
+   extra:"Единственная сторис про 90-е за неделю. Если не успели вечером — поставьте завтра первым делом с утра."}
+ ]},
+ {date:"02.10", dow:"Пятница", aud:"Родители", el:"Обувь для занятий", items:[
+  {id:"d2s1", f:"story", t:"09:00", title:"Викторина про детскую обувь",
+   shoot:"Чешки, балетки и джазовки в ряд на светлом фоне.",
+   text:"Что нужно на хореографию в 5 лет?",
+   sticker:"Викторина с тремя вариантами. Правильный ответ: «То, что принято в вашей студии» — и объясните в следующей сторис."},
+  {id:"d2s2", f:"story", t:"13:00", title:"Товар дня: обувь и для чего каждая",
+   shoot:"Каждая пара отдельно в руках, подпись с назначением.",
+   text:"Чешки — для первых занятий. Балетки — для классики. Джазовки — для эстрадного и современного танца.",
+   cta:"«Покажем, как измерить стопу дома. Напишите “размер”»."},
+  {id:"d2s3", f:"story", t:"18:00", title:"Закулисье: как подбираем обувь ребёнку",
+   shoot:"Продавец помогает с примеркой. Лицо ребёнка не показываем без согласия родителей — достаточно ног и рук.",
+   text:"Примерка занимает пять минут, а обувь потом служит весь сезон.",
+   sticker:"Стикер «Вопрос»: «Спросите про размер или модель»."},
+  {id:"d2r1", f:"reel", t:"17:00", title:"Рилс 1: образ с нуля за 15 секунд",
+   steps:["Кадр 1. Пустой пол в зале или на светлом фоне. Текст: «Собираем образ с нуля».",
+          "Кадр 2. По хлопку появляется обувь. Текст: «Обувь».",
+          "Кадр 3. Хлопок — лосины. Текст: «Низ».",
+          "Кадр 4. Хлопок — купальник или футболка. Текст: «Верх».",
+          "Кадр 5. Хлопок — гетры и сумка. Текст: «Детали».",
+          "Кадр 6. Танцор в полном образе делает одно эффектное движение. Текст: «Готово. Танцуй»."],
+   text:"Образ на тренировку за 15 секунд. Всю неделю разбираем его по частям в сторис. Что покажем первым — обувь или форму?",
+   extra:"Переходы делайте на сильную долю музыки. Модель — взрослый танцор или ребёнок с согласия родителей."}
+ ]},
+ {date:"03.10", dow:"Суббота", aud:"Родители", el:"Верх: купальник, футболка", items:[
+  {id:"d3s1", f:"story", t:"10:00", title:"Опрос: требования студии к форме",
+   shoot:"Купальники на вешалках, разложенные по цветам.",
+   text:"В вашей студии есть требования к форме?",
+   sticker:"Опрос: «Да, строгие» / «Свободная»."},
+  {id:"d3p1", f:"post", t:"12:00", title:"Пост 1: что купить к первому занятию",
+   shoot:"Раскладка сверху: обувь, лосины, купальник, гетры, резинки для волос, сумка.",
+   copy:true,
+   text:"Ребёнок идёт на танцы. Что купить к первому занятию\n\nКороткий список, чтобы не брать лишнего.\n\n1. Обувь. Уточните у педагога, что принято в студии: чешки, балетки или джазовки. Мерьте в тех носках, в которых ребёнок будет заниматься.\n2. Низ. Лосины или шорты, которые не сползают и не сковывают движения.\n3. Верх. Купальник или футболка по фигуре: педагогу важно видеть спину и плечи.\n4. Гетры или носки. Для разогрева и на случай прохладного зала.\n5. Резинки и шпильки, если в студии просят пучок.\n6. Сумка или мешок для формы.\n\nНе уверены в требованиях? Напишите нам название студии или направление — подскажем, что обычно берут. В «Танцуй» весь комплект можно собрать за один визит.\n\nСохраните пост, чтобы не потерять."},
+  {id:"d3s2", f:"story", t:"13:00", title:"Товар дня: купальники и футболки",
+   shoot:"Палитра цветов, крупно швы и ткань, одна модель на фигуре.",
+   text:"Цвет формы лучше уточнить у педагога. Скажите какой — подберём.",
+   cta:"«Напишите цвет и рост — пришлём варианты»."},
+  {id:"d3s3", f:"story", t:"18:00", title:"Анонс чек-листа",
+   shoot:"Скриншот поста или та же раскладка сверху.",
+   text:"Собрали чек-лист к первому занятию. Сохраните и перешлите тому, кто только записал ребёнка на танцы.",
+   sticker:"Ссылка на пост."}
+ ]},
+ {date:"04.10", dow:"Воскресенье", aud:"Спортсмены", el:"Одежда для гимнастики, фитнеса, йоги", items:[
+  {id:"d4s1", f:"story", t:"11:00", title:"Опрос: чем занимаетесь",
+   shoot:"Спокойный кадр: коврик, форма, бутылка воды.",
+   text:"Сегодня про форму для зала. Чем занимаетесь вы?",
+   sticker:"Опрос: «Гимнастика» / «Фитнес» / «Йога» / «Танцы»."},
+  {id:"d4s2", f:"story", t:"14:00", title:"Товар дня: три комплекта",
+   shoot:"Три раскладки подряд, по одной на направление.",
+   text:"Для гимнастики — по фигуре и без лишних швов. Для фитнеса — то, что отводит влагу. Для йоги — мягкое и тянущееся.",
+   cta:"«Напишите направление — соберём комплект»."},
+  {id:"d4s3", f:"story", t:"19:00", title:"Игра «Это или то»",
+   shoot:"Два товара рядом на одном кадре, две-три пары подряд.",
+   text:"Топ или футболка? Шорты или лосины?",
+   sticker:"Опрос на каждой паре."}
+ ]},
+ {date:"05.10", dow:"Понедельник", aud:"Спортсмены", el:"Аксессуары и инвентарь", items:[
+  {id:"d5s1", f:"story", t:"09:00", title:"Вопрос: что в вашей сумке",
+   shoot:"Приоткрытая спортивная сумка, из неё что-то выглядывает.",
+   text:"Что всегда лежит в вашей спортивной сумке?",
+   sticker:"Стикер «Вопрос». Ответы пригодятся вечером."},
+  {id:"d5s2", f:"story", t:"13:00", title:"Товар дня: мелочи, которые забывают",
+   shoot:"Коврик, резинки, наколенники, гетры — каждый предмет отдельным коротким кадром.",
+   text:"Мелочи, без которых тренировка идёт хуже.",
+   cta:"«Напишите “сумка” — пришлём подборку с ценами»."},
+  {id:"d5r2", f:"reel", t:"17:00", title:"Рилс 2: что лежит в сумке спортсмена",
+   steps:["Кадр 1. Вид сверху, закрытая сумка. Текст: «Что в сумке у того, кто не пропускает тренировки».",
+          "Кадры 2–6. Руки достают по одной вещи под бит: форма, обувь, гетры, резинка, коврик. На каждой вещи — короткая подпись.",
+          "Кадр 7. Всё красиво разложено вокруг сумки. Текст: «Чего не хватает в вашей?»."],
+   text:"Собрали сумку, с которой не страшно прийти на любую тренировку. Чего не хватает в вашей? Пишите в комментариях.",
+   extra:"Снимайте одним планом со штатива, вещи доставайте в ритм."},
+  {id:"d5s3", f:"story", t:"18:00", title:"Ответы подписчиков и анонс рилса",
+   shoot:"Два-три ответа из утреннего стикера, затем фрагмент рилса.",
+   text:"Вот что носите с собой вы. А вот что положили бы мы.",
+   sticker:"Ссылка на рилс."}
+ ]},
+ {date:"06.10", dow:"Вторник", aud:"Тренеры и студии", el:"Форма на коллектив", items:[
+  {id:"d6s1", f:"story", t:"09:00", title:"Опрос: вы тренер?",
+   shoot:"Стопка одинаковой формы разных размеров.",
+   text:"Сегодня день для тех, кто одевает целую группу.",
+   sticker:"Опрос: «Я тренер» / «Перешлю своему тренеру»."},
+  {id:"d6s2", f:"story", t:"13:00", title:"Предложение: форма на группу одним заказом",
+   shoot:"Ряд одинаковых купальников или футболок от маленького размера к большому.",
+   text:"Соберём форму на всю группу: единый цвет, полный размерный ряд, один заказ.",
+   cta:"«Напишите, сколько человек и какое направление — подготовим подборку».",
+   extra:"Впишите свои условия: скидку от количества, сроки, возможность дозаказа."},
+  {id:"d6s3", f:"story", t:"18:00", title:"Отзыв студии или сборка большого заказа",
+   shoot:"Фото коллектива в вашей форме с разрешения студии. Если такого нет — как упаковываете заказ на группу.",
+   text:"Так выглядит группа, когда форма у всех одна.",
+   sticker:"Отметка студии, если показываете её фото."}
+ ]},
+ {date:"07.10", dow:"Среда", aud:"Все", el:"Финал: готовые образы", items:[
+  {id:"d7s1", f:"story", t:"09:00", title:"Итог недели: образ собран",
+   shoot:"Коллаж из кадров недели: низ, обувь, верх, аксессуары.",
+   text:"Неделю собирали образ по частям. Сегодня показываем целиком."},
+  {id:"d7p2", f:"post", t:"12:00", title:"Пост 2: итоги недели и предложение студиям",
+   shoot:"Карусель из трёх фото: образ для ребёнка, для взрослого танцора, для зала.",
+   copy:true,
+   text:"Неделю собирали образ с нуля. Вот что получилось\n\nЧетверг — низ: лосины и гетры. Пятница — обувь. Суббота — верх. Воскресенье — одежда для гимнастики, фитнеса и йоги. Понедельник — аксессуары и инвентарь. Вторник — форма на коллектив.\n\nВ карусели три готовых образа: для ребёнка на хореографию, для взрослого танцора и для зала.\n\nТренерам и руководителям студий: соберём форму на всю группу одним заказом — единый цвет и полный размерный ряд. Напишите нам в сообщения, сколько человек и какое направление, подготовим подборку.\n\nА какой элемент образа вы выбираете дольше всего? Расскажите в комментариях."},
+  {id:"d7s2", f:"story", t:"13:00", title:"Три готовых образа",
+   shoot:"Три образа подряд, каждый отдельной сторис-карточкой или одним видео.",
+   text:"Для ребёнка на хореографию. Для взрослого танцора. Для зала.",
+   sticker:"Опрос: «Какой ваш?»."},
+  {id:"d7s3", f:"story", t:"18:00", title:"Анонс поста и вопрос на следующую неделю",
+   shoot:"Обложка поста, затем простой фон с вопросом.",
+   text:"Итоги недели уже в ленте. Что разобрать дальше?",
+   sticker:"Стикер «Вопрос»: «Какую тему хотите на следующей неделе?»."}
+ ]}
+];
+
+const ALL = DAYS.flatMap(d => d.items);
+const TOTAL = ALL.length;
+let done = {};
+let filter = "all";
+const LS_KEY = "tancuy-plan-2026-10-01";
+const note = document.getElementById("note");
+
+function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+function row(dl, label, value){ if(!value) return; dl.append(el("dt", null, label), el("dd", null, value)); }
+
+const gaiter = document.getElementById("gaiter");
+for(let i=0;i<TOTAL;i++) gaiter.append(el("i"));
+
+const daysEl = document.getElementById("days");
+DAYS.forEach(d => {
+  const sec = el("section","day"); sec.dataset.date = d.date;
+  const head = el("div","day-head");
+  head.append(el("div","day-date",d.date), el("div","day-dow",d.dow), el("div","day-aud",d.aud), el("div","day-el",d.el));
+  const cnt = el("div","day-count"); head.append(cnt);
+  const list = el("div","day-items");
+  d.items.forEach(it => {
+    const item = el("div","item"); item.dataset.id = it.id; item.dataset.f = it.f;
+    const lab = el("label","check");
+    const cb = document.createElement("input"); cb.type = "checkbox";
+    cb.setAttribute("aria-label", "Готово: " + it.title);
+    cb.addEventListener("change", () => toggle(it.id, cb.checked));
+    lab.append(cb);
+    const det = document.createElement("details");
+    const sum = document.createElement("summary");
+    sum.append(el("span","time",it.t), el("span","tag "+it.f, FORMAT[it.f]));
+    if(it.n90) sum.append(el("span","tag n90","90-е"));
+    sum.append(el("span","title",it.title));
+    const body = el("div","body"); const dl = el("dl");
+    row(dl, "Что снять", it.shoot);
+    if(it.steps){
+      dl.append(el("dt",null,"Сценарий"));
+      const dd = el("dd"); const ol = el("ol"); it.steps.forEach(s => ol.append(el("li",null,s))); dd.append(ol); dl.append(dd);
+    }
+    if(it.text){
+      dl.append(el("dt",null, it.f==="post" ? "Текст поста" : it.f==="reel" ? "Подпись к рилсу" : "Текст на экране"));
+      const dd = el("dd"); const t = el("div", it.copy ? "text" : null, it.text); dd.append(t);
+      if(it.copy){
+        const b = el("button","copy","Скопировать текст"); b.type = "button";
+        b.addEventListener("click", async () => {
+          try{ await navigator.clipboard.writeText(it.text); b.textContent = "Текст скопирован"; }
+          catch(e){ const r = document.createRange(); r.selectNodeContents(t); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Текст выделен — скопируйте вручную"; }
+          setTimeout(() => b.textContent = "Скопировать текст", 2500);
+        });
+        dd.append(b);
+      }
+      dl.append(dd);
+    }
+    row(dl, "Интерактив", it.sticker);
+    row(dl, "Призыв", it.cta);
+    row(dl, "На заметку", it.extra);
+    body.append(dl); det.append(sum, body);
+    item.append(lab, det); list.append(item);
+  });
+  sec.append(head, list); daysEl.append(sec);
+});
+
+function paint(){
+  let n = 0;
+  document.querySelectorAll(".item").forEach(item => {
+    const on = !!done[item.dataset.id]; if(on) n++;
+    item.classList.toggle("done", on);
+    item.querySelector("input").checked = on;
+    const show = filter==="all" || (filter==="todo" ? !on : item.dataset.f===filter);
+    item.classList.toggle("hidden", !show);
+  });
+  document.querySelectorAll(".day").forEach((sec,i) => {
+    const items = DAYS[i].items; const dn = items.filter(x => done[x.id]).length;
+    sec.querySelector(".day-count").textContent = "Готово " + dn + " из " + items.length;
+    sec.classList.toggle("hidden", !sec.querySelector(".item:not(.hidden)"));
+  });
+  document.getElementById("pcount").textContent = n===TOTAL ? "Неделя закрыта: 25 из 25" : "Готово " + n + " из " + TOTAL;
+  gaiter.setAttribute("aria-valuenow", n);
+  [...gaiter.children].forEach((s,i) => s.classList.toggle("on", i<n));
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll("#filters button").forEach(x => x.setAttribute("aria-pressed", x===b));
+  paint();
+});
+
+/* сохранение отметок в памяти браузера */
+function saveLocal(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(done)); note.textContent = ""; }
+  catch(e){ note.textContent = "Браузер не даёт сохранять отметки: они пропадут, когда закроете страницу."; }
+}
+try{ const raw = localStorage.getItem(LS_KEY); if(raw) done = JSON.parse(raw) || {}; }catch(e){}
+function toggle(id, on){
+  if(on) done[id] = true; else delete done[id];
+  paint(); saveLocal();
+}
+paint();
+</script>
+</body>
+</html>
